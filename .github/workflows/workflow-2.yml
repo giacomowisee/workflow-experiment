@@ -1,14 +1,25 @@
-name: Workflow 1
+name: Workflow 2
 
 on:
-  push:
+  workflow_run: 
+    workflows: [Workflow 1]
+    types:
+      - completed
     branches:
       - main 
 
 jobs:
+  
   workflow-1-run:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
     - name: Run Workflow 1
       run: |
-        echo "Hello World!"
+        echo "Hello World By Workflow 2!"
+
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'The triggering workflow failed'
