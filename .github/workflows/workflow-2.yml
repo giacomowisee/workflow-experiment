@@ -10,11 +10,11 @@ on:
 
 jobs:
   
-  workflow-1-run:
+  workflow-2-run:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-    - name: Run Workflow 1
+    - name: Run Workflow 2
       run: |
         echo "Hello World By Workflow 2!"
 
